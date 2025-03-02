@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Reset Password &mdash; Stisla</title>
+    <title>Reset Password &mdash; Jijo</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -37,7 +37,6 @@
                             </div>
 
                             <div class="card-body">
-                                <p class="text-muted">We will send a link to reset your password</p>
                                 <form method="POST" action="{{ route('password.store') }}">
                                     @csrf
                                     <input type="hidden" name="token" value="{{ $request->route('token') }}">

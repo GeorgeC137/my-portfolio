@@ -4,12 +4,12 @@
     <ul class="navbar-nav navbar-right">
         <li class="dropdown"><a href="#" data-toggle="dropdown"
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                <img alt="image" src={{ asset('/assets/img/avatar/avatar-1.png') }} class="rounded-circle mr-1">
                 <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">Logged in 5 min ago</div>
-                <a href="features-profile.html" class="dropdown-item has-icon">
+                <a href="{{ route('profile.edit') }}" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>
                 <a href="features-settings.html" class="dropdown-item has-icon">
@@ -51,20 +51,17 @@
 
                 </ul>
             </li>
-            <li class="menu-header">Starter</li>
+            <li class="menu-header">Sections</li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                    <span>Hero</span></a>
+                <ul class="dropdown-menu" style="display: none;">
+                    <li><a class="nav-link" href="{{ route('admin.hero.index') }}">Hero Section</a></li>
 
-            <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
-            <li><a class="nav-link" href="features-post-create.html"><i class="far fa-square"></i> <span>Form
-                        Page</span></a></li>
-
-            <li><a class="nav-link" href="features-profile.html"><i class="far fa-square"></i> <span>Profile</span></a>
+                </ul>
             </li>
 
-            <li><a class="nav-link" href="auth-login.html"><i class="far fa-square"></i> <span>Login</span></a></li>
-            <li><a class="nav-link" href="auth-register.html"><i class="far fa-square"></i> <span>Register</span></a>
-            </li>
-            <li><a class="nav-link" href="auth-forgot-password.html"><i class="far fa-square"></i> <span>Forgot
-                        password</span></a></li>
+            {{-- <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li> --}}
 
         </ul>
     </aside>
