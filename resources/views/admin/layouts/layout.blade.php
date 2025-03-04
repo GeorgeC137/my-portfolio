@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Dashboard</title>
 
     <!-- General CSS Files -->
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href={{ asset('assets/css/plugins/select2.min.css') }}>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Template CSS -->
     <link rel="stylesheet" href={{ asset('assets/css/style.css') }}>
     <link rel="stylesheet" href={{ asset('assets/css/components.css') }}>
@@ -35,15 +37,8 @@
             <div class="main-content">
                 @yield('content')
             </div>
-            <footer class="main-footer">
-                <div class="footer-left">
-                    Copyright &copy; 2025 <div class="bullet"></div> Design By <a href="https://nauval.in/">George
-                        Omollo Ochola</a>
-                </div>
-                <div class="footer-right">
-                    2.3.0
-                </div>
-            </footer>
+
+            @include('admin.layouts.footer')
         </div>
     </div>
 
@@ -80,14 +75,61 @@
     <!-- Page Specific JS File -->
     <script src={{ asset('assets/js/page/forms-advanced-forms.js') }}></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        @if(!empty($errors->all()))
-            @foreach($errors->all() as $error)
-                toastr.error("{{$error}}")
+        @if (!empty($errors->all()))
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}")
             @endforeach
-        @endif    
+        @endif
     </script>
+
+    <script>
+        $(document).ready(function() {
+            // Ajax CSRF Token
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            // Sweet alert for delete
+            $('body').on('click', '.delete-item', function(e) {
+                e.preventDefault();
+                let deleteUrl = $(this).attr('href');
+                console.log(deleteUrl);
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: deleteUrl,
+                            success: function(data) {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                })
+                                window.location.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(error);
+                            }
+                        })
+                    }
+                });
+            })
+        })
+    </script>
+
+    @stack('scripts')
 </body>
 
 </html>

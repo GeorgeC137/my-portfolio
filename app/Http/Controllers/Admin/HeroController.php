@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Hero;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+// use File;
 
 class HeroController extends Controller
 {
@@ -13,7 +15,8 @@ class HeroController extends Controller
      */
     public function index()
     {
-        return view('admin.hero.index');
+        $hero = Hero::first();
+        return view('admin.hero.index', compact('hero'));
     }
 
     /**
@@ -59,7 +62,12 @@ class HeroController extends Controller
             'image' => ['image', 'max:3000']
         ]);
 
+        $hero = Hero::first();
+
         if ($request->hasFile('image')) {
+            if ($hero && File::exists(public_path($hero->image))) {
+                File::delete(public_path($hero->image));
+            }
             $image = $request->file('image');
             $imageName = rand().$image->getClientOriginalName();
             $image->move(public_path('/uploads'), $imageName);
@@ -75,11 +83,11 @@ class HeroController extends Controller
                 'sub_title' => $request->sub_title,
                 'btn_text' => $request->btn_text,
                 'btn_url' => $request->btn_url,
-                'image' => isset($imagePath) ? $imagePath : ''
+                'image' => isset($imagePath) ? $imagePath : $hero->image
             ]
         );
 
-        toastr()->success('Updated Successfully', 'Congrats');
+        toastr()->success('Updated Successfully');
         return redirect()->back();
 
         // dd('success');
