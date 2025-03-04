@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
 use App\DataTables\ServiceDataTable;
 use App\Http\Controllers\Controller;
@@ -21,7 +22,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.services.create');
     }
 
     /**
@@ -29,7 +30,18 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:200'],
+            'description' => ['required', 'max:500'],
+        ]);
+
+        $service = new Service();
+        $service->name = $request->name;
+        $service->description = $request->description;
+        $service->save();
+
+        toastr()->success('Service created');
+        return redirect()->route('admin.services.index');
     }
 
     /**
@@ -45,7 +57,8 @@ class ServiceController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $service = Service::findOrFail($id);
+        return view('admin.services.edit', compact('service'));
     }
 
     /**
@@ -53,7 +66,18 @@ class ServiceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:200'],
+            'description' => ['required', 'max:500'],
+        ]);
+
+        $updatedService = Service::findOrFail($id);
+        $updatedService->name = $request->name;
+        $updatedService->description = $request->description;
+        $updatedService->save();
+
+        toastr()->success('Service updated');
+        return redirect()->route('admin.services.index');
     }
 
     /**
@@ -61,6 +85,7 @@ class ServiceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $service = Service::findOrFail($id);
+        $service->delete();
     }
 }

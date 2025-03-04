@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\TyperTitleController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Frontend\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -32,6 +33,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('typer-title', TyperTitleController::class);
     // services
     Route::resource('service', ServiceController::class);
+    // about 
+    Route::resource('about', AboutController::class);
 });
 
 require __DIR__.'/auth.php';
