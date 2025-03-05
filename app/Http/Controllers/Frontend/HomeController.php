@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Hero;
 use App\Models\Service;
+use App\Models\About;
 use App\Models\TyperTitle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,6 +16,7 @@ class HomeController extends Controller
         $hero = Hero::first();
         $typerTitles = TyperTitle::all();
         $services = Service::all();
-        return view('frontend.home', compact('hero', 'typerTitles', 'services'));
+        $about = About::first();
+        return view('frontend.home', compact('hero', 'typerTitles', 'services', 'about'));
     }
 }

@@ -14,7 +14,8 @@
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- CSS Libraries -->
-    <link rel="stylesheet" href={{ asset('assets/css/plugins/summernote-bs4.css') }}>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs4.min.css" integrity="sha512-ngQ4IGzHQ3s/Hh8kMyG4FC74wzitukRMIcTOoKT3EyzFZCILOPF0twiXOQn75eDINUfKBYmzYn2AA8DkAk8veQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href={{ asset('assets/css/plugins/summernote-bs4.css') }}> -->
     <link rel="stylesheet" href={{ asset('assets/css/plugins/selectric.css') }}>
     <link rel="stylesheet" href={{ asset('assets/css/plugins/bootstrap-tagsinput.css') }}>
     <link rel="stylesheet" href={{ asset('assets/css/plugins/bootstrap-timepicker.min.css') }}>
@@ -58,6 +59,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs4.min.css"
         integrity="sha512-ngQ4IGzHQ3s/Hh8kMyG4FC74wzitukRMIcTOoKT3EyzFZCILOPF0twiXOQn75eDINUfKBYmzYn2AA8DkAk8veQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src={{  asset('assets/js/plugins/summernote-bs4.js') }}></script>
     <script src={{ asset('assets/js/plugins/jquery.selectric.min.js') }}></script>
     <script src={{ asset('assets/js/plugins/jquery.uploadPreview.min.js') }}></script>
     <script src={{ asset('assets/js/plugins/bootstrap-tagsinput.min.js') }}></script>

@@ -64,6 +64,7 @@
 
             <li><a class="nav-link" href="{{ route('admin.service.index') }}"><i class="far fa-square"></i>
                     <span>Services</span></a></li>
+            <li><a class="nav-link" href="{{ route('admin.about.index') }}"><i class="far fa-square"></i> <span>About</span></a></li>
             {{-- <li><a class="nav-link" href=""><i class="far fa-square"></i> <span>Services</span></a></li> --}}
 
         </ul>

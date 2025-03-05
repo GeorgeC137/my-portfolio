@@ -41,7 +41,7 @@ class ServiceController extends Controller
         $service->save();
 
         toastr()->success('Service created');
-        return redirect()->route('admin.services.index');
+        return redirect()->route('admin.service.index');
     }
 
     /**
@@ -77,7 +77,7 @@ class ServiceController extends Controller
         $updatedService->save();
 
         toastr()->success('Service updated');
-        return redirect()->route('admin.services.index');
+        return redirect()->route('admin.service.index');
     }
 
     /**
