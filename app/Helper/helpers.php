@@ -20,3 +20,23 @@ function handleUpload($inputName, $model=null)
 		throw $e;
 	}
 }
+
+// Delete file 
+function deleteFileIfExists($filePath)
+{
+	try {
+		if (\File::exists(public_path($filePath))) {
+			\File::delete(public_path($filePath));
+		}
+	} catch(\Exception $e) {
+		throw $e;
+	}
+}
+
+// Get dynamic color 
+function getColor($index)
+{
+	$colors = ['#558bff', '#fecc90', '#ff885e', '#282828', '#190844', '#892DE1', '#9dd3ff'];
+
+	return $colors[$index % count($colors)];
+}

@@ -10,7 +10,6 @@ class Hero extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
         'title',
         'sub_title',
         'btn_url',

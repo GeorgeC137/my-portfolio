@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
     <title>Dashboard</title>
 
     <!-- General CSS Files -->
@@ -114,12 +114,20 @@
                             type: 'DELETE',
                             url: deleteUrl,
                             success: function(data) {
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your file has been deleted.",
-                                    icon: "success"
-                                })
-                                window.location.reload();
+                                if (data.status == 'error') {
+                                    Swal.fire({
+                                        title: "Failed!",
+                                        text: "Delete all items in this category to proceed",
+                                        icon: "error"
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: "Your file has been deleted.",
+                                        icon: "success"
+                                    })
+                                    window.location.reload();
+                                }
                             },
                             error: function(xhr, status, error) {
                                 console.log(error);

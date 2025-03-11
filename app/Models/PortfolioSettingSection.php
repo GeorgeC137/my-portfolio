@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TyperTitle extends Model
+class PortfolioSettingSection extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'id',
-        'title'
+    	'title',
+    	'sub_title',
+    	'id'
     ];
 }

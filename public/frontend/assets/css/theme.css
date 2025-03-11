@@ -19,6 +19,12 @@ body {
     text-transform: uppercase;
 }
 
+.img-fix {
+    width: 100%;
+    height: 700px;
+    object-fit: cover;
+}
+
 /* .full-wrapper {
     position: relative;
 } */
