@@ -6,7 +6,7 @@
             <div class="section-header-back">
                 <a href="features-posts.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
-            <h1>About Section</h1>
+            <h1>Experience Section</h1>
         </div>
 
         <div class="section-body">
@@ -14,10 +14,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Update About Section</h4>
+                            <h4>Update Experience Section</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('admin.about.update', $about) }}" method="POST"
+                            <form action="{{ route('admin.experience.update', 1) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -33,34 +33,29 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input type="text" value="{{ $about->title }}" name="title"
+                                        <input type="text" value="{{ $experience->title }}" name="title" value=""
                                             class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
                                   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                                   <div class="col-sm-12 col-md-7">
-                                    <textarea name="description" class="summernote">{!! $about->description !!}</textarea>
+                                    <textarea name="description" class="summernote">{!! strip_tags($experience->description) !!}</textarea>
                                   </div>
                                 </div>
-                                @if($about->resume)
-                                    <div class="form-group row mb-4">
-                                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                      <div class="col-sm-12 col-md-7">
-                                        <div>
-                                            <i class="fas fa-file-pdf" style="font-size: 100px"></i>
-                                        </div>
-                                      </div>
-                                    </div>
-                                @endif
                                 <div class="form-group row mb-4">
-                                  <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Resume</label>
-                                  <div class="col-sm-12 col-md-7">
-                                    <div class="custom-file">
-                                      <input name="resume" type="file" class="custom-file-input" id="customFile">
-                                      <label class="custom-file-label" for="customFile">Choose file</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Phone</label>
+                                    <div class="col-sm-12 col-md-7">
+                                        <input type="text" value="{{ $experience->phone }}" name="phone" value=""
+                                            class="form-control">
                                     </div>
-                                  </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
+                                    <div class="col-sm-12 col-md-7">
+                                        <input type="text" value="{{ $experience->email }}" name="email" value=""
+                                            class="form-control">
+                                    </div>
                                 </div>
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
@@ -81,7 +76,7 @@
     <script>
         $(document).ready(function(){
             $('#image-preview').css({
-                'background-image': 'url("{{ asset($about->image) }}")',
+                'background-image': 'url("{{ asset($experience->image) }}")',
                 'background-size': 'cover',
                 'background-position': 'center center',
             })

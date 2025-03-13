@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\TyperTitleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\ExperienceController;
+use App\Http\Controllers\Admin\FeedbackSectionSettingController;
+use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PortfolioItemController;
 use App\Http\Controllers\Admin\SkillItemController;
@@ -51,6 +54,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('skill-section-setting', SkillSectionSettingController::class);
     // skill-items route
     Route::resource('skill-item', SkillItemController::class);
+    // experience route 
+    Route::resource('experience', ExperienceController::class);
+    // feedback route 
+    Route::resource('feedback', FeedbackController::class);
+    // feedback section setting route 
+    Route::resource('feedback-section-setting', FeedbackSectionSettingController::class);
     // download resume
     Route::get('resume/download', [AboutController::class, 'resumeDownload'])->name('resume.download');
     
