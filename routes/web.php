@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\TyperTitleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\FooterSocialLinkController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\FeedbackSectionSettingController;
 use App\Http\Controllers\Admin\BlogSectionSettingController;
+use App\Http\Controllers\Admin\ContactSectionSettingController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BlogCategoryController;
@@ -27,6 +29,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 Route::get('portfolio-details/{id}', [HomeController::class, 'showPortfolio'])->name('portfolio.details');
 Route::get('blog-details/{id}', [HomeController::class, 'showBlog'])->name('show.blog');
 Route::get('blogs', [HomeController::class, 'blogs'])->name('blogs');
+Route::post('contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -65,6 +68,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('blog', BlogController::class);
     // blog section setting route 
     Route::resource('blog-section-setting', BlogSectionSettingController::class);
+    // contact section setting route 
+    Route::resource('contact-section-setting', ContactSectionSettingController::class);
+    // footer social links route
+    Route::resource('footer-social-links', FooterSocialLinkController::class);
     // download resume
     Route::get('resume/download', [AboutController::class, 'resumeDownload'])->name('resume.download');
     

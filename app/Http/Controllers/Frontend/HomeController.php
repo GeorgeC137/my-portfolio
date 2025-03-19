@@ -15,9 +15,12 @@ use App\Models\TyperTitle;
 use App\Models\PortfolioSettingSection;
 use App\Models\FeedbackSectionSetting;
 use App\Models\BlogSectionSetting;
+use App\Models\ContactSectionSetting;
 use App\Models\SkillSectionSetting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMail;
 
 class HomeController extends Controller
 {
@@ -37,6 +40,7 @@ class HomeController extends Controller
         $skill = SkillSectionSetting::first();
         $portfolioTitle = PortfolioSettingSection::first();
         $feedbackTitle = FeedbackSectionSetting::first();
+        $contactTitle = ContactSectionSetting::first();
         return view('frontend.home', compact(
         	'hero',
             'blogs',
@@ -51,7 +55,8 @@ class HomeController extends Controller
             'skill',
             'experience',
             'feedbacks',
-            'blogTitle'
+            'blogTitle',
+            'contactTitle'
         ));
     }
 
@@ -73,5 +78,19 @@ class HomeController extends Controller
     {
         $blogs = Blog::latest()->paginate(9);
         return view('frontend.blogs', compact('blogs'));
+    }
+
+    public function contact(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'max:100'],
+            'message' => ['required', 'max:2000'],
+            'subject' => ['required', 'max:300'],
+            'email' => ['required', 'email']
+        ]);
+
+        Mail::send(new ContactMail($request->all()));
+
+        return response(['status' => 'success', 'message' => 'Mail sent successfully']);
     }
 }
